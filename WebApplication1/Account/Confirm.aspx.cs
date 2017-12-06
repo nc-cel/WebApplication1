@@ -4,7 +4,7 @@ using System.Web.UI;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
-using WebApplication1.Models;
+using WebApplication1.Account.Models;
 
 namespace WebApplication1.Account
 {
