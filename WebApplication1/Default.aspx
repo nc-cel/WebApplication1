@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1._Default" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1.Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -6,10 +6,10 @@
         <asp:ListView ID="destinationList"  
                       ItemType="WebApplication1.Account.Models.Destination" 
                       runat="server"
-                      SelectMethod="GetDestination" >
+                      SelectMethod="GetDestinations" >
             <ItemTemplate>
                 <b style="font-size: large; font-style: normal">
-                    <a href="/ProductList.aspx?id=<%#: Item.DestinationID %>">
+                    <a href="/ProductList.aspx?id=<%#: Item.DestinationId %>">
                         <%#: Item.DestinationName %>
                     </a>
                 </b>

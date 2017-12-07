@@ -8,11 +8,11 @@ namespace WebApplication1
 {
     public static class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        public static void RegisterRoutes(RouteCollection Routes)
         {
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
-            routes.EnableFriendlyUrls(settings);
+            Routes.EnableFriendlyUrls(settings);
         }
     }
 }

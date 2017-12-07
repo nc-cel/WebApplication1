@@ -6,15 +6,13 @@ using System.Web;
 
 namespace WebApplication1.Account.Models
 {
-    public class Destination
+    public class Carrier
     {
         [Key, ScaffoldColumn(false)]
-        public int DestinationId { get; set; }
+        public int CarrierId { get; set; }
 
         [Required, StringLength(100), Display(Name = "Name")]
-        public string DestinationName { get; set; }
-
-        public virtual ICollection<Destination> Destinations { get; set; }
+        public string CarrierName { get; set; }
 
     }
 }

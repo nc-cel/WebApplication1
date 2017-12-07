@@ -13,23 +13,23 @@ namespace WebApplication1.Account
 {
     public partial class TwoFactorAuthenticationSignIn : System.Web.UI.Page
     {
-        private ApplicationSignInManager signinManager;
-        private ApplicationUserManager manager;
+        private ApplicationSignInManager _signinManager;
+        private ApplicationUserManager _manager;
 
         public TwoFactorAuthenticationSignIn()
         {
-            manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
+            _manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            _signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var userId = signinManager.GetVerifiedUserId<ApplicationUser, string>();
+            var userId = _signinManager.GetVerifiedUserId<ApplicationUser, string>();
             if (userId == null)
             {
                 Response.Redirect("/Account/Error", true);
             }
-            var userFactors = manager.GetValidTwoFactorProviders(userId);
+            var userFactors = _manager.GetValidTwoFactorProviders(userId);
             Providers.DataSource = userFactors.Select(x => x).ToList();
             Providers.DataBind();            
         }
@@ -39,7 +39,7 @@ namespace WebApplication1.Account
             bool rememberMe = false;
             bool.TryParse(Request.QueryString["RememberMe"], out rememberMe);
             
-            var result = signinManager.TwoFactorSignIn<ApplicationUser, string>(SelectedProvider.Value, Code.Text, isPersistent: rememberMe, rememberBrowser: RememberBrowser.Checked);
+            var result = _signinManager.TwoFactorSignIn<ApplicationUser, string>(SelectedProvider.Value, Code.Text, isPersistent: rememberMe, rememberBrowser: RememberBrowser.Checked);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -58,15 +58,15 @@ namespace WebApplication1.Account
 
         protected void ProviderSubmit_Click(object sender, EventArgs e)
         {
-            if (!signinManager.SendTwoFactorCode(Providers.SelectedValue))
+            if (!_signinManager.SendTwoFactorCode(Providers.SelectedValue))
             {
                 Response.Redirect("/Account/Error");
             }
 
-            var user = manager.FindById(signinManager.GetVerifiedUserId<ApplicationUser, string>());
+            var user = _manager.FindById(_signinManager.GetVerifiedUserId<ApplicationUser, string>());
             if (user != null)
             {
-                var code = manager.GenerateTwoFactorToken(user.Id, Providers.SelectedValue);
+                var code = _manager.GenerateTwoFactorToken(user.Id, Providers.SelectedValue);
             }
 
             SelectedProvider.Value = Providers.SelectedValue;

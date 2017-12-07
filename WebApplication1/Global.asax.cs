@@ -20,7 +20,7 @@ namespace WebApplication1
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Initialize the product database.
-            Database.SetInitializer(new RouteDatabaseInitializer());
+            Database.SetInitializer(new SegmentDatabaseInitializer());
 
         }
     }

@@ -7,12 +7,12 @@ using WebApplication1.Account.Models;
 
 namespace WebApplication1.Account.Models
 {
-    public class RouteDatabaseInitializer : DropCreateDatabaseIfModelChanges<RouteContext>
+    public class SegmentDatabaseInitializer : DropCreateDatabaseIfModelChanges<SegmentContext>
     {
-        protected override void Seed(RouteContext context)
+        protected override void Seed(SegmentContext context)
         {
             GetDestinations().ForEach(c => context.Destinations.Add(c));
-            GetRoutes().ForEach(p => context.Routes.Add(p));
+            GetSegments().ForEach(p => context.Segments.Add(p));
         }
 
         private static List<Destination> GetDestinations()
@@ -21,12 +21,12 @@ namespace WebApplication1.Account.Models
             {
                 new Destination()
                 {
-                    DestinationID = 1,
+                    DestinationId = 1,
                     DestinationName = "Sierra Leone"
                 },
                 new Destination()
                 {
-                    DestinationID = 2,
+                    DestinationId = 2,
                     DestinationName = "Tunis"
                 },
             };
@@ -34,16 +34,16 @@ namespace WebApplication1.Account.Models
             return l;
         }
 
-        private static List<Route> GetRoutes()
+        private static List<Segment> GetSegments()
         {
-            var products = new List<Route>
+            var products = new List<Segment>
             {
-                new Route
+                new Segment
                 {
-                    RouteID = 1,
-                    ToID = 1,
+                    SegmentId = 1,
+                    ToId = 1,
                     FromId = 2,
-                    fragttid = 2.5,
+                    Duration = 2.5F,
                 },
 
             };
